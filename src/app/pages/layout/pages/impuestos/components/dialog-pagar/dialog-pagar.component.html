@@ -1,0 +1,56 @@
+<mat-card class="custom-card">
+    <mat-card-content class="pt-3">
+        <mat-card-header class="mat-card-header bg-primary p-2">
+            <mat-card-title>
+                <b>Realizar pago</b>
+            </mat-card-title>
+        </mat-card-header>
+        <br>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>Tipo de bien:</b><br>
+                        <mat-chip-list aria-label="Fish selection">
+                            <mat-chip>
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    {{ datosImpuesto.iconoTipoBien | lowercase }}
+                                </mat-icon>
+                                {{ datosImpuesto.nombreTipoBien }}
+                            </mat-chip>
+                        </mat-chip-list>
+                    </div>
+                    <div class="col-md-6">
+                        <b>ID Impuesto:</b><br>{{dialogData.datosRegistro.idImpuesto}}
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>Fecha limite pago ordinario:</b><br>
+                        {{datosImpuesto.impuesto.fechaLimitePagoOrdinario | date}}
+                    </div>
+                    <div class="col-md-6">
+                        <b>Valor total ordinario:</b><br>
+                        {{ datosImpuesto.valorTotalOrdinario | currency }}
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="col-md-5">
+                <img class="img-pagos" src="../../../../../../../assets/imagenes/iconos_pagos.jpg">
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-footer class="footer-custom" fxLayoutAlign="end center">
+        <div mat-dialog-actions class="mat-dialog-actions">
+            <button class="button-aceptar" mat-raised-button color="primary" (click)="pagar()">
+                Pagar
+            </button>
+            <button class="button-aceptar" mat-raised-button color="warn" (click)="cerrarDialog()">
+                Cerrar
+            </button>
+        </div>
+    </mat-card-footer>
+</mat-card>

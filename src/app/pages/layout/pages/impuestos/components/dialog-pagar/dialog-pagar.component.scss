@@ -1,0 +1,38 @@
+mat-card-header {
+    justify-content: space-between;
+
+    mat-card-title {
+        display: grid;
+        margin-bottom: 0px;
+
+        span {
+            font-size: 18px;
+        }
+
+        small {
+            font-size: 13px;
+            color: var(--color-text);
+        }
+    }
+
+    .close {
+        padding: 8px;
+    }
+}
+
+mat-card-content {
+    margin-bottom: 4px;
+    .id-impuesto {
+        position: absolute;
+        right: 5px;
+    }
+    .img-pagos {
+        width: 100%;
+    }
+}
+
+.mat-card-footer {
+    margin: 0px;
+    display: flex;
+    justify-content: flex-end;
+}

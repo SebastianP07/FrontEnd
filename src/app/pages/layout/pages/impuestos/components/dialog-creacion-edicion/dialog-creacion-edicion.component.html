@@ -1,0 +1,189 @@
+<mat-card class="custom-card">
+  <mat-card-content class="pt-3">
+    <div class="row">
+      <div class="col-md-12 id-impuesto">
+        <span>
+          <b>ID</b>
+          {{ dialogData?.idImpuesto }}
+        </span>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Nombre</b>
+        <br />
+        {{ dialogData.datosRegistro?.bien?.contribuyente?.primerNombre }}
+        {{ dialogData.datosRegistro?.bien?.contribuyente?.segundoNombre }}
+        {{ dialogData.datosRegistro?.bien?.contribuyente?.primerApellido }}
+        {{ dialogData.datosRegistro?.bien?.contribuyente?.segundoApellido }}
+      </div>
+      <div class="col-md-6">
+        <b>Identificación</b>
+        <br />
+        {{ dialogData.datosRegistro?.bien?.contribuyente?.tipoIdentificacion }}
+        {{
+        dialogData.datosRegistro?.bien?.contribuyente?.numeroIdentificacion
+        }}
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Bien</b>
+        <br />
+        <mat-chip>
+          <mat-icon aria-hidden="false" aria-label="Example home icon">
+            {{ dialogData.datosRegistro?.bien?.tipoBien?.icono | lowercase }}
+          </mat-icon>
+          {{ dialogData.datosRegistro?.bien?.tipoBien?.nombre }}
+        </mat-chip>
+      </div>
+      <div class="col-md-6">
+        <b>Bien</b>
+        <br />
+        <mat-chip>
+          <span *ngIf="dialogData.datosRegistro?.estadoTipoBien">
+            Vigente
+          </span>
+          <span *ngIf="!dialogData.datosRegistro?.estadoTipoBien">
+            No VIgente
+          </span>
+        </mat-chip>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Base pago extra ordinario con pago voluntario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto
+        ?.basePagoExtraOrdinarioConPagoVoluntario
+        }}
+      </div>
+      <div class="col-md-6">
+        <b>Base pago extraordinario</b>
+        <br />
+        {{ dialogData.datosRegistro?.impuesto?.basePagoExtraordinario }}
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Base pago ordinario</b>
+        <br />
+        {{ dialogData.datosRegistro?.impuesto?.basePagoOrdinario }}
+      </div>
+      <div class="col-md-6">
+        <b>Base pago ordinario con pago voluntario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto?.basePagoOrdinarioConPagoVoluntario
+        }}
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Fecha limite pago extra ordinario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto?.fechaLimitePagoExtraOrdinario
+        | date: "dd/MM/yyyy"
+        }}
+      </div>
+      <div class="col-md-6">
+        <b>Fecha limite pago ordinario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto?.fechaLimitePagoOrdinario
+        | date: "dd/MM/yyyy"
+        }}
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Periodicidad</b>
+        <br />
+        {{ dialogData.datosRegistro?.impuesto?.periodicidad }}
+      </div>
+      <div class="col-md-6">
+        <b>Obligatorio</b>
+        <br />
+        <mat-chip>
+          <span *ngIf="dialogData.datosRegistro?.impuesto?.obligatorio">
+            Si
+          </span>
+          <span *ngIf="!dialogData.datosRegistro?.impuesto?.obligatorio">
+            No
+          </span>
+        </mat-chip>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Valor pago minimo con pago voluntario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto?.valorPagoMinimoConPagoVoluntario
+        | currency
+        }}
+      </div>
+      <div class="col-md-6">
+        <b>Valor pago minimo extra ordinario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto?.valorPagoMinimoExtraOrdinario
+        | currency
+        }}
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-6">
+        <b>Valor pago minimo extra ordinario con pago voluntario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto
+        ?.valorPagoMinimoExtraOrdinarioConPagoVoluntario | currency
+        }}
+      </div>
+      <div class="col-md-6">
+        <b>Valor pago minimo ordinario</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.impuesto?.valorPagoMinimoOrdinario
+        | currency
+        }}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <b>Valor pago Total</b>
+        <br />
+        {{
+        dialogData.datosRegistro?.valorTotalOrdinario | currency
+        }}
+      </div>
+      <div class="col-md-6">
+        <ngx-barcode #barcode [bc-value]="dialogData.idImpuesto" [bc-element-type]="'img'" [bc-width]="2"
+          [bc-height]="30" [bc-margin-left]="50"></ngx-barcode>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer class="footer-custom" fxLayoutAlign="end center">
+    <div mat-dialog-actions class="mat-dialog-actions">
+      <button class="button-aceptar" mat-raised-button color="primary" (click)="imprimir()">
+        Imprimir
+      </button>
+      <button class="button-aceptar" mat-raised-button color="warn" (click)="cerrarDialog()">
+        Cerrar
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

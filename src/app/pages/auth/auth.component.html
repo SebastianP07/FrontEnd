@@ -1,0 +1,28 @@
+<div class="rowRegistro">
+  <div class="row">
+    <div class="col-lg-6 col-img">
+      <img src="assets/imagenes/Wallpaper.jpg" alt="" />
+    </div>
+    <div class="col-lg-6">
+      <div class="row-img row">
+        <img src="assets/imagenes/logoPrincipal-peq.png" alt="" />
+      </div>
+      <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" mat-stretch-tabs
+        color="primary">
+        <mat-tab label="Iniciar sesión">
+          <div class="items-form">
+            <app-inicio-sesion></app-inicio-sesion>
+          </div>
+        </mat-tab>
+        <mat-tab label="Registro de Usuario">
+          <div class="items-form">
+            <app-registro-usuario (accionRegistro)="mostrarInicioSesion()"></app-registro-usuario>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+<footer>
+  <p class="mt-5 mb-3 text-muted">© Universidad Central - 2021</p>
+</footer>

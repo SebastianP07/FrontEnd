@@ -1,0 +1,164 @@
+<mat-card class="custom-card">
+  <mat-card-header class="bg-primary p-2">
+    <mat-card-title class="m-0 pt-1">
+      <span>{{ dialogData.headerDialog }}</span>
+
+      <div [ngSwitch]="dialogData?.accion">
+        <div *ngSwitchCase="'agregar'">
+          <ng-container *ngTemplateOutlet="agregar"></ng-container>
+        </div>
+        <div *ngSwitchCase="'editar'">
+          <ng-container *ngTemplateOutlet="editar"></ng-container>
+        </div>
+      </div>
+      <ng-template #agregar>
+        <small>Aquí puedes agregar un contribuyente.</small>
+      </ng-template>
+      <ng-template #editar>
+        <small>Aquí puedes editar el registro del contribuyente.</small>
+      </ng-template>
+    </mat-card-title>
+
+    <a class="close" (click)="closedDialog()">
+      <mat-icon>clear</mat-icon>
+    </a>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="pt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div mat-dialog-content>
+          <div class="body-dialog">
+            <form [formGroup]="formRegistro">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Tipo identificación (*)</mat-label>
+                    <mat-select formControlName="tipoIdentificacion">
+                      <mat-option *ngFor="let tipo of tiposdeDocumento" [value]="tipo.valor">{{
+                        tipo.descripcion
+                      }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Número de identificación (*)</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      placeholder="Número de Identificación"
+                      formControlName="numeroIdentificacion"
+                    />
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Primer apellido (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Primer Apellido"
+                      formControlName="primerApellido"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Segundo apellido</mat-label>
+                    <input
+                      matInput
+                      placeholder="Segundo Apellido"
+                      formControlName="segundoApellido"
+                    />
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Primer nombre (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Primer Nombre"
+                      formControlName="primerNombre"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Segundo nombre</mat-label>
+                    <input
+                      matInput
+                      placeholder="Segundo Nombre"
+                      formControlName="segundoNombre"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Correo electrónico (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Correo Electrónico"
+                      formControlName="correoElectronico"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Telefono principal (*)</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      placeholder="Teléfono"
+                      formControlName="telefonoPrincipal"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Dirección de notificación (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Dirección de Notificación"
+                      formControlName="direccionNotificacion"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer class="footer-custom"  fxLayout="row"  fxLayoutAlign="end center">
+
+    <div mat-dialog-actions class="mat-dialog-actions" >
+      <button
+        class="button-aceptar"
+        mat-raised-button
+        color="primary"
+        [disabled]="!formRegistro.valid"
+        (click)="acceptDialogBtn(formRegistro.value)"
+      >
+        {{ dialogData.accion === "agregar" ? "Agregar" : "Actualizar" }}
+      </button>
+      <button mat-raised-button color="warn" (click)="closedDialog()">
+        Cerrar
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,22 @@
+.container-custom {
+  .mat-card-header {
+    justify-content: space-between;
+
+    mat-card-title {
+      padding-top: 10px;
+    }
+
+    .button-add {
+      color: black;
+    }
+  }
+
+  mat-card-content {
+    table {
+      width: 100%;
+      .mat-icon-button {
+        color: var(--color-secondary);
+      }
+    }
+  }
+}

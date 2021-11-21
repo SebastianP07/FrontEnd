@@ -1,0 +1,187 @@
+<mat-card class="custom-card">
+  <mat-card-header class="bg-primary p-2">
+    <mat-card-title class="m-0 pt-1">
+      <span>{{ dialogData.headerDialog }}</span>
+
+      <div [ngSwitch]="dialogData?.accion">
+        <div *ngSwitchCase="'agregar'">
+          <ng-container *ngTemplateOutlet="agregar"></ng-container>
+        </div>
+        <div *ngSwitchCase="'editar'">
+          <ng-container *ngTemplateOutlet="editar"></ng-container>
+        </div>
+      </div>
+      <ng-template #agregar>
+        <small>Aquí puedes agregar el impuesto.</small>
+      </ng-template>
+      <ng-template #editar>
+        <small>Aquí puedes editar el impuesto seleccionado.</small>
+      </ng-template>
+    </mat-card-title>
+
+    <a class="close" (click)="closedDialog()">
+      <mat-icon>clear</mat-icon>
+    </a>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="pt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div mat-dialog-content>
+          <div class="body-dialog">
+            <form [formGroup]="formRegistro">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                      <mat-label>Fecha limite de pago ordinario (*)</mat-label>
+                      <input matInput formControlName="fechaLimitePagoOrdinario" [matDatepicker]="picker1" />
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                      <mat-label>Fecha limite de pago extraordinario (*)</mat-label>
+                      <input matInput formControlName="fechaLimitePagoExtraOrdinario" [matDatepicker]="picker2"
+                        [min]="fechaLimPagoOrdinario" />
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2>
+                      </mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Tipo de bien</mat-label>
+                      <mat-select [(value)]="tipoBienSeleccionado">
+                        <mat-option *ngFor="let bien of tiposBien" [disable]="bien?.estado" [value]="bien?.id">
+                          {{ bien?.nombre }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Periodicidad Impuesto</mat-label>
+                      <mat-select [(value)]="periodicidadSeleccionado">
+                        <mat-option *ngFor="let dominio of periodicidadImpuesto" [value]="dominio?.id">
+                          {{ dominio?.descripcion }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 center">
+                    <div class="box-slide-toggle">
+                      <mat-label ngClass="labelBeforeSlide">Inactivo</mat-label>
+                      <mat-slide-toggle slot="end" color="primary" formControlName="estado">Activo
+                      </mat-slide-toggle>
+                    </div>
+                  </div>
+                  <div class="col-md-6 center">
+                    <div class="box-slide-toggle">
+                      <mat-label ngClass="labelBeforeSlide">Opcional</mat-label>
+                      <mat-slide-toggle slot="end" color="primary" formControlName="obligatorio">Obligatorio
+                      </mat-slide-toggle>
+                    </div>
+                  </div>
+                </div>
+                <mat-divider> </mat-divider>
+                <div class="row">
+                  <div class="col-md-12">
+                    <h3>Base Calculo Impuesto</h3>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Base Pago Ordinario (*)</mat-label>
+                      <input type="number" matInput placeholder="Base Pago Ordinario"
+                        formControlName="basePagoOrdinario" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Base Pago Ordinario con Pago Voluntario (*)</mat-label>
+                      <input type="number" matInput placeholder="Base Pago Ordinario con Pago Voluntario"
+                        formControlName="basePagoOrdinarioConPagoVoluntario" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Base Pago Extraordinario (*)</mat-label>
+                      <input type="number" matInput placeholder="Base Pago Extraordinario"
+                        formControlName="basePagoExtraordinario" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Base Pago Extraordinario con Pago Voluntario
+                        (*)</mat-label>
+                      <input type="number" matInput placeholder="Base Pago Extraordinario con Pago Voluntario"
+                        formControlName="basePagoExtraOrdinarioConPagoVoluntario" />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="row">
+                  <div class="col-md-12">
+                    <h3>Valores Pagos Minimos</h3>
+                  </div>
+                </div>
+
+                <div class="row m2">
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Valor Pago Minimo Ordinario (*)</mat-label>
+                      <input type="number" matInput placeholder="Valor Pago Minimo Ordinario"
+                        formControlName="valorPagoMinimoOrdinario" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Valor Pago Minimo Ordinario con Pago Voluntario
+                        (*)</mat-label>
+                      <input type="number" matInput placeholder="Valor Pago Minimo Ordinario con Pago Voluntario"
+                        formControlName="valorPagoMinimoConPagoVoluntario" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Valor Pago Minimo Extraordinario (*)</mat-label>
+                      <input type="number" matInput placeholder="Valor Pago Minimo Extraordinario"
+                        formControlName="valorPagoMinimoExtraOrdinario" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 center">
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Valor Pago Minimo Extraordinario con Pago Voluntario
+                        (*)</mat-label>
+                      <input type="number" matInput placeholder="Valor Pago Minimo Extraordinario con Pago Voluntario"
+                        formControlName="valorPagoMinimoExtraOrdinarioConPagoVoluntario" />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer class="footer-custom" fxLayoutAlign="end center">
+    <div mat-dialog-actions class="mat-dialog-actions">
+      <button class="button-aceptar" mat-raised-button color="primary" [disabled]="!formRegistro.valid"
+        (click)="acceptDialogBtn(formRegistro.value)">
+        {{ dialogData.accion === "agregar" ? "Agregar" : "Actualizar" }}
+      </button>
+      <button mat-raised-button color="warn" (click)="closedDialog()">
+        Cerrar
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

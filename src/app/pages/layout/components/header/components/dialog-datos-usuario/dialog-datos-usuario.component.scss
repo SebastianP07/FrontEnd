@@ -1,0 +1,61 @@
+.container-custom {
+  padding: 15px;
+  text-align: center;
+  .row-image {
+    img {
+      width: 150px;
+      border-radius: 100%;
+    }
+  }
+}
+
+.row-botton {
+  text-align: end;
+}
+
+.rowRegistro {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.col-img {
+  background: #082b59;
+}
+
+.col-img img {
+  width: auto;
+  height: 100vh;
+}
+
+.items-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.items-form .col-md-8 {
+  text-align: center;
+}
+
+.items-form .row-img {
+  padding-bottom: 20px;
+}
+
+.form-signin mat-form-field,
+.form-signin button {
+  width: 100%;
+}
+
+.form-signin button {
+  margin-bottom: 46px;
+}
+
+.form-signin .register-user {
+  padding-bottom: 25px;
+}
+
+.form-signin a:hover {
+  cursor: pointer;
+  color: #082b59;
+  text-decoration: underline;
+}

@@ -1,0 +1,113 @@
+<mat-card class="custom-card">
+  <mat-card-header class="bg-primary p-2">
+    <mat-card-title class="m-0 pt-1">
+      <span>{{ dialogData.headerDialog }}</span>
+
+      <div [ngSwitch]="dialogData?.parametrosServicioToma.accion">
+        <div *ngSwitchCase="'agregar'">
+          <ng-container *ngTemplateOutlet="agregar"></ng-container>
+        </div>
+        <div *ngSwitchCase="'editar'">
+          <ng-container *ngTemplateOutlet="editar"></ng-container>
+        </div>
+      </div>
+      <ng-template #agregar>
+        <small>Home.</small>
+      </ng-template>
+      <ng-template #editar>
+        <small>Aquí puedes editar el registro de la toma.</small>
+      </ng-template>
+    </mat-card-title>
+
+    <a class="close" (click)="closedDialog()">
+      <mat-icon>clear</mat-icon>
+    </a>
+  </mat-card-header>
+  <mat-card-content class="pt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div mat-dialog-content>
+          <div class="body-dialog">
+            <form [formGroup]="formRegistro">
+              <div class="row">
+                <div class="col-md-5">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Nombre de la toma (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Nombre de la toma"
+                      formControlName="nombreToma"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="legacy" class="datePicker-range">
+                    <mat-label>Ingrese un rango de fechas (*)</mat-label>
+                    <mat-date-range-input
+                      class="datePicker-text"
+                      [rangePicker]="picker"
+                      [min]="minDate"
+                      [max]="maxDate"
+                    >
+                      <input
+                        matStartDate
+                        placeholder="Fecha inicio"
+                        formControlName="initDate"
+                      />
+                      <input
+                        matEndDate
+                        placeholder="Fecha fin"
+                        formControlName="endDate"
+                      />
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-date-range-picker
+                      #picker
+                      startView="year"
+                    ></mat-date-range-picker>
+                  </mat-form-field>
+                  <span class="desc-datePicker">Día/mes/año</span>
+                </div>
+                <div class="col-md-3 center">
+                  <div class="box-slide-toggle">
+                    <mat-label ngClass="labelBeforeSlide">Inactivo</mat-label>
+                    <mat-slide-toggle
+                      slot="end"
+                      color="primary"
+                      formControlName="activo"
+                      >Activo</mat-slide-toggle
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer class="footer-custom" fxLayoutAlign="end center">
+    <div mat-dialog-actions class="mat-dialog-actions">
+      <button
+        class="button-aceptar"
+        mat-raised-button
+        color="primary"
+        [disabled]="!formRegistro.valid"
+        (click)="acceptDialogBtn(formRegistro.value)"
+      >
+        {{
+          dialogData.parametrosServicioToma.accion === "agregar"
+            ? "Agregar"
+            : "Actualizar"
+        }}
+      </button>
+      <button mat-raised-button color="warn" (click)="closedDialog()">
+        Cerrar
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,112 @@
+<mat-card class="custom-card">
+  <mat-card-header class="bg-primary p-2">
+    <mat-card-title class="m-0 pt-1">
+      <span>{{ dialogData.headerDialog }}</span>
+
+      <div [ngSwitch]="dialogData?.accion">
+        <div *ngSwitchCase="'agregar'">
+          <ng-container *ngTemplateOutlet="agregar"></ng-container>
+        </div>
+        <div *ngSwitchCase="'editar'">
+          <ng-container *ngTemplateOutlet="editar"></ng-container>
+        </div>
+      </div>
+      <ng-template #agregar>
+        <small>Agregar vehículo.</small>
+      </ng-template>
+      <ng-template #editar>
+        <small>Editar vehículo.</small>
+      </ng-template>
+    </mat-card-title>
+
+    <a class="close" (click)="closedDialog()">
+      <mat-icon>clear</mat-icon>
+    </a>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="pt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <div mat-dialog-content>
+          <div class="body-dialog">
+            <form [formGroup]="formRegistro">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Placa (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Placa del vehiculo"
+                      formControlName="placa"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Marca (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Marca del vehiculo"
+                      formControlName="marca"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Linea (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Linea del vehiculo"
+                      formControlName="linea"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Modelo (*)</mat-label>
+                    <input
+                      type="number"
+                      matInput
+                      placeholder="Modelo del vehiculo"
+                      formControlName="modelo"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Uso (*)</mat-label>
+                    <input
+                      matInput
+                      placeholder="Uso del vehiculo"
+                      formControlName="uso"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer class="footer-custom" fxLayoutAlign="end center">
+    <div mat-dialog-actions class="mat-dialog-actions">
+      <button
+        class="button-aceptar"
+        mat-raised-button
+        color="primary"
+        [disabled]="!formRegistro.valid"
+        (click)="acceptDialogBtn(formRegistro.value)"
+      >
+        {{ dialogData.accion === "agregar" ? "Agregar" : "Actualizar" }}
+      </button>
+      <button mat-raised-button color="warn" (click)="closedDialog()">
+        Cerrar
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

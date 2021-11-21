@@ -1,0 +1,75 @@
+<div class="menu-bar">
+  <div *ngIf="rol === 1" class="menu">
+    <h4 class="name negrita">Zona Alcaldía</h4>
+    <mat-divider></mat-divider>
+    <ul>
+      <li (click)="goToPage('gestion-impuestos')">
+        <button mat-button class="menu-button">
+          <mat-icon>request_quote</mat-icon>
+          <span>Gestión de impuestos </span>
+        </button>
+      </li>
+      <li (click)="goToPage('contribuyente')">
+        <button mat-button class="menu-button">
+          <mat-icon>home</mat-icon>
+          <span>Gestión contribuyentes </span>
+        </button>
+      </li>
+      <br>
+      <button mat-button class="menu-button">
+        <span>Gestión de Bienes</span>
+      </button>
+      <hr>
+      <li (click)="goToPage('gestion-bienes/listar/vehiculos')">
+        <button mat-button class="menu-button">
+          <mat-icon>directions_car</mat-icon>
+          <span>Vehiculos</span>
+        </button>
+      </li>
+      <li (click)="goToPage('gestion-bienes/listar/viviendas')">
+
+        <button mat-button class="menu-button">
+          <mat-icon>home</mat-icon>
+          <span> Viviendas</span>
+        </button>
+      </li>
+      <li (click)="goToPage('gestion-bienes/listar/comercios')">
+
+        <button mat-button class="menu-button">
+          <mat-icon>business</mat-icon>
+          <span>Comercios</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="rol === 2" class="menu">
+    <h4 class="name negrita">Zona Contribuyente</h4>
+    <mat-divider></mat-divider>
+    <ul>
+      <li (click)="goToPage('contribuyente/detalle')">
+        <button mat-button class="menu-button">
+          <mat-icon>perm_identity</mat-icon>
+          <span>Datos contribuyente</span>
+        </button>
+      </li>
+      <li (click)="goToPage('contribuyente/dashboard')">
+        <button mat-button class="menu-button">
+          <mat-icon>home</mat-icon>
+          <span>Gestión de Bienes</span>
+        </button>
+      </li>
+      <li (click)="goToPage('impuestos')">
+        <button mat-button class="menu-button">
+          <mat-icon>request_quote</mat-icon>
+          <span>Gestión de impuestos</span>
+        </button>
+      </li>
+    </ul>
+
+  </div>
+  <div class="menu-footer">
+    <div class="menu-footer-title">
+      Todos Los Derechos Reservados. <br />2021 © John Albert lopez.
+    </div>
+  </div>
+</div>

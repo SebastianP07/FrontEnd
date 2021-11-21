@@ -1,0 +1,314 @@
+<mat-card class="custom-card">
+  <mat-card-content class="pt-3">
+    <div class="container-custom" *ngIf="dialogData.datosRegistro">
+      <div class="wrapper_main">
+        <div class="wrapper_main_content">
+          <mat-card class="p-0">
+            <mat-card-header class="mat-card-header bg-primary p-2">
+              <mat-card-title> Impuestos </mat-card-title>
+            </mat-card-header>
+            <br />
+            <mat-card-content class="pt-3 pb-3">
+              <table mat-table [dataSource]="dataSource">
+                <!-- Position Column -->
+                <ng-container matColumnDef="Id">
+                  <th mat-header-cell *matHeaderCellDef>No.</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.impuesto.id }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="TipoBien">
+                  <th mat-header-cell *matHeaderCellDef>Tipo Bien</th>
+                  <td mat-cell *matCellDef="let element">
+                    <mat-chip-list aria-label="Fish selection">
+                      <mat-chip>
+                        <mat-icon
+                          aria-hidden="false"
+                          aria-label="Example home icon"
+                          >{{ element.impuesto.tipoBien.icono | lowercase }}</mat-icon
+                        >
+                        {{ element.impuesto.tipoBien.nombre }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="Estado">
+                  <th mat-header-cell *matHeaderCellDef>Estado</th>
+                  <td mat-cell *matCellDef="let element">
+                    <mat-chip-list aria-label="Fish selection">
+                      <mat-chip>
+                        <span *ngIf="element.impuesto.estado === true">
+                          Vigente
+                        </span>
+                        <span *ngIf="element.impuesto.estado === false">
+                          No VIgente
+                        </span>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="Obligatorio">
+                  <th mat-header-cell *matHeaderCellDef>Obligatorio</th>
+                  <td mat-cell *matCellDef="let element">
+                    <mat-chip-list aria-label="Fish selection">
+                      <mat-chip>
+                        <span *ngIf="element.impuesto.obligatorio === true">
+                          Obligatorio
+                        </span>
+                        <span *ngIf="element.impuesto.obligatorio === false">
+                          Voluntario
+                        </span>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Pagado">
+                  <th mat-header-cell *matHeaderCellDef>Pagado</th>
+                  <td mat-cell *matCellDef="let element">
+                    <mat-chip-list aria-label="Fish selection">
+                      <mat-chip
+                        [ngClass]="element.pagado ? 'pagado' : 'no-pagado'"
+                      >
+                        <span *ngIf="element.pagado"> Pagado </span>
+                        <span *ngIf="!element.pagado"> No pagado </span>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="FechaLimitePagoOrdinario">
+                  <th mat-header-cell *matHeaderCellDef>
+                    Fecha Limite Pago Ordinario
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{
+                      element.impuesto.fechaLimitePagoOrdinario
+                        | date: "dd/MM/yyyy"
+                    }}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="FechaLimitePagoExtraOrdinario">
+                  <th mat-header-cell *matHeaderCellDef>
+                    Fecha Limite Pago Extra Ordinario
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{
+                      element.impuesto.fechaLimitePagoExtraOrdinario
+                        | date: "dd/MM/yyyy"
+                    }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="VerMas">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element">
+                    <button
+                      mat-raised-button
+                      (click)="verDetalle(element)"
+                      color="primary"
+                    >
+                      Ver Detalle
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="container-custom" *ngIf="datosRegistro">
+      <div class="wrapper_main">
+        <div class="wrapper_main_content">
+          <mat-card class="p-0">
+            <mat-card-header class="mat-card-header bg-primary p-2">
+              <mat-card-title>
+                Detalle del impuesto No.{{ datosRegistro.id }}
+              </mat-card-title>
+            </mat-card-header>
+            <br />
+            <mat-card-content class="pt-3 pb-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Nombre</b>
+                  <br />
+                  {{ datosRegistro?.bien?.contribuyente?.primerNombre }}
+                  {{ datosRegistro?.bien?.contribuyente?.segundoNombre }}
+                  {{ datosRegistro?.bien?.contribuyente?.primerApellido }}
+                  {{ datosRegistro?.bien?.contribuyente?.segundoApellido }}
+                </div>
+                <div class="col-md-6">
+                  <b>Identificación</b>
+                  <br />
+                  {{ datosRegistro?.bien?.contribuyente?.tipoIdentificacion }}
+                  {{ datosRegistro?.bien?.contribuyente?.numeroIdentificacion }}
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Bien</b>
+                  <br />
+                  <mat-chip>
+                    <mat-icon
+                      aria-hidden="false"
+                      aria-label="Example home icon"
+                    >
+                      {{ datosRegistro?.bien?.tipoBien?.icono }}
+                    </mat-icon>
+                    {{ datosRegistro?.bien?.tipoBien?.nombre }}
+                  </mat-chip>
+                </div>
+                <div class="col-md-6">
+                  <b>Bien</b>
+                  <br />
+                  <mat-chip>
+                    <span *ngIf="datosRegistro?.estadoTipoBien"> Vigente </span>
+                    <span *ngIf="!datosRegistro?.estadoTipoBien">
+                      No VIgente
+                    </span>
+                  </mat-chip>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Base pago extra ordinario con pago voluntario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto
+                      ?.basePagoExtraOrdinarioConPagoVoluntario
+                  }}
+                </div>
+                <div class="col-md-6">
+                  <b>Base pago extraordinario</b>
+                  <br />
+                  {{ datosRegistro?.impuesto?.basePagoExtraordinario }}
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Base pago ordinario</b>
+                  <br />
+                  {{ datosRegistro?.impuesto?.basePagoOrdinario }}
+                </div>
+                <div class="col-md-6">
+                  <b>Base pago ordinario con pago voluntario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto?.basePagoOrdinarioConPagoVoluntario
+                  }}
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Fecha limite pago extra ordinario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto?.fechaLimitePagoExtraOrdinario
+                      | date: "dd/MM/yyyy"
+                  }}
+                </div>
+                <div class="col-md-6">
+                  <b>Fecha limite pago ordinario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto?.fechaLimitePagoOrdinario
+                      | date: "dd/MM/yyyy"
+                  }}
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Periodicidad</b>
+                  <br />
+                  {{ datosRegistro?.impuesto?.periodicidad }}
+                </div>
+                <div class="col-md-6">
+                  <b>Obligatorio</b>
+                  <br />
+                  <mat-chip>
+                    <span *ngIf="datosRegistro?.impuesto?.obligatorio">
+                      Si
+                    </span>
+                    <span *ngIf="!datosRegistro?.impuesto?.obligatorio">
+                      No
+                    </span>
+                  </mat-chip>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Valor pago minimo con pago voluntario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto?.valorPagoMinimoConPagoVoluntario
+                      | currency
+                  }}
+                </div>
+                <div class="col-md-6">
+                  <b>Valor pago minimo extra ordinario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto?.valorPagoMinimoExtraOrdinario
+                      | currency
+                  }}
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <b>Valor pago minimo extra ordinario con pago voluntario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto
+                      ?.valorPagoMinimoExtraOrdinarioConPagoVoluntario
+                      | currency
+                  }}
+                </div>
+                <div class="col-md-6">
+                  <b>Valor pago minimo ordinario</b>
+                  <br />
+                  {{
+                    datosRegistro?.impuesto?.valorPagoMinimoOrdinario | currency
+                  }}
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer class="footer-custom" fxLayoutAlign="end center">
+    <div mat-dialog-actions class="mat-dialog-actions">
+      <button
+        class="button-aceptar"
+        mat-raised-button
+        color="warn"
+        (click)="cerrarDialog()"
+      >
+        Cerrar
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

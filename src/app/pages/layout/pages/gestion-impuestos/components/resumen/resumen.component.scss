@@ -1,0 +1,16 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 16px;
+    .cantidad {
+        font-size: 55px;
+    }
+    .descripcion {
+        padding-top: 10px;
+    }
+}
+
+.alerta {
+    background-color: rgb(255, 161, 161);
+}

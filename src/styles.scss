@@ -1,0 +1,21 @@
+:root {
+  --background-base-color: #f6f8fa;
+  --background-menu: #ffff;
+  --background-menu-admin: #0d47a1;
+  --background-menu-user: #c94cc2;
+}
+
+body {
+  background-color: var(--background-base-color);
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.custom-modalbox > .mat-dialog-container {
+  padding: 0px !important;
+  overflow: hidden;
+}
+
+.mat-expansion-panel-body {
+  padding: 0px !important;
+}

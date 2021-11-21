@@ -1,0 +1,52 @@
+mat-card-header {
+  justify-content: space-between;
+
+  mat-card-title {
+    display: grid;
+    margin-bottom: 0px;
+
+    span {
+      font-size: 18px;
+    }
+
+    small {
+      font-size: 13px;
+      color: var(--color-text);
+    }
+  }
+
+  .close {
+    padding: 8px;
+  }
+}
+
+mat-card-content {
+  margin-bottom: 4px;
+  mat-form-field {
+    width: 100%;
+  }
+  .datePicker-range {
+    margin-bottom: -18px;
+  }
+  .desc-datePicker {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 11px;
+  }
+  .box-slide-toggle {
+    margin: 15px 0px 1px 0px;
+    .labelBeforeSlide {
+      vertical-align: top;
+      line-height: 24px;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .center {
+    text-align: center;
+  }
+}
+
+.mat-card-footer {
+  margin: 0px;
+}

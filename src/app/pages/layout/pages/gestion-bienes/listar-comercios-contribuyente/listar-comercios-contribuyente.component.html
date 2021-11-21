@@ -1,0 +1,87 @@
+<div class="container-custom">
+  <div class="wrapper_main">
+    <div class="wrapper_main_content">
+      <mat-card class="p-0">
+        <mat-card-header class="mat-card-header bg-primary p-2">
+          <mat-card-title> Listado de Comercios </mat-card-title>
+          <button
+            mat-raised-button
+            class="button-add"
+            (click)="accionRegistro()"
+          >
+            <mat-icon>add</mat-icon>
+            Agregar
+          </button>
+        </mat-card-header>
+        <br />
+        <mat-card-content class="pt-3 pb-3">
+          <table mat-table [dataSource]="dataSource" class="">
+            <!-- Position Column -->
+            <ng-container matColumnDef="Nit">
+              <th mat-header-cell *matHeaderCellDef>Nit</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.nit }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="NombreEstablecimientoComercial">
+              <th mat-header-cell *matHeaderCellDef>
+                Nombre establecimiento comercial
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.nombreEstablecimientoComercial }}
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="CodigoActividad">
+              <th mat-header-cell *matHeaderCellDef>Codigo Actividad</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.codigoActividad }}
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="BaseGravableActividad">
+              <th mat-header-cell *matHeaderCellDef>Base gravable actividad</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.baseGravableActividad }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Impuestos">
+              <th mat-header-cell *matHeaderCellDef>Ver Impuestos</th>
+              <td mat-cell *matCellDef="let element">
+                <button
+                  (click)="verDetalleImpuestos(element)"
+                  color="warn"
+                  mat-button
+                  color="primary"
+                >
+                  <mat-icon>mode_edit</mat-icon> Ver Impuestos
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef=" ">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button
+                  (click)="accionRegistro(element)"
+                  color="warn"
+                  mat-mini-fab
+                >
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

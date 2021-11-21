@@ -1,0 +1,103 @@
+<div class="container-custom">
+  <div class="row row-image">
+    <div class="col-md-12">
+      <form class="form-signin" [formGroup]="userForm" (ngSubmit)="submitFormuser(userForm.value)">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Tipo de identificación</mat-label>
+              <mat-select disabled [(value)]="tipoIdentificacionSeleccionado">
+                <mat-option *ngFor="let tipo of tiposIdentificacion" [value]="tipo?.id">
+                  {{ tipo?.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Número de identificación</mat-label>
+              <input matInput type="text" placeholder="Número de identificación" class="form-control"
+                formControlName="numeroIdentificacion" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Primer apellido</mat-label>
+              <input matInput type="text" placeholder="Primer apellido" class="form-control"
+                formControlName="primerApellido" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Segundo apellido</mat-label>
+              <input matInput type="text" placeholder="Segundo apellido" class="form-control"
+                formControlName="segundoApellido" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Primer nombre</mat-label>
+              <input matInput type="text" placeholder="Primer nombre" class="form-control"
+                formControlName="primerNombre" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Segundo nombre</mat-label>
+              <input matInput type="text" placeholder="Segundo nombre" class="form-control"
+                formControlName="segundoNombre" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Correo Electrónico</mat-label>
+              <input matInput type="text" placeholder="a@a.com" class="form-control"
+                formControlName="correoElectronico" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono</mat-label>
+              <input matInput type="number" placeholder="" class="form-control" formControlName="telefono" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección de notifiación</mat-label>
+              <input matInput type="text" placeholder="Dirección" class="form-control" formControlName="direccion" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <button mat-raised-button color="primary" class="btn btn-primary" [disabled]="!userForm.valid">
+              Actualizar
+            </button>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row row-botton">
+    <div class="col-md-12">
+      <button (click)="cerrarSesion()" mat-button color="warn">
+        Cerrar sesión
+      </button>
+    </div>
+  </div>
+</div>

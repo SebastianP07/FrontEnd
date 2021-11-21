@@ -1,0 +1,8 @@
+<mat-card [ngClass]="data.cantidad > 0 && data?.descipcion?.includes('mora') ? 'alerta' : ''">
+    <mat-card-content>
+        <div class="box">
+            <span class="cantidad">{{data?.cantidad}}</span>
+            <span class="descripcion">{{data?.descipcion}}</span>
+        </div>
+    </mat-card-content>
+</mat-card>

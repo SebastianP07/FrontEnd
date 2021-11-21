@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="header.component.scss">
+<div class="toolbar" [ngClass]="rol === 1 ? 'user-admin' : 'user'" role="banner">
+  <img src="assets/imagenes/LogoBlanco.png" alt=""/>
+  <div class="nameButton">
+    <span class="name" (click)="abirDatosUsuario()">
+      {{dataUser?.primerNombre}}
+      {{dataUser?.segundoNombre}}
+      {{dataUser?.primerApellido}}
+      {{dataUser?.segundoApellido}}
+    </span>
+    <button (click)="abirDatosUsuario()" mat-icon-button>
+      <mat-icon> perm_identity</mat-icon>
+    </button>
+  </div>
+</div>

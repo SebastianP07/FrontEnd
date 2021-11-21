@@ -1,0 +1,20 @@
+th,
+td {
+  text-align: center;
+}
+
+mat-chip-list {
+  text-align: center;
+
+  .pagado {
+    width: 93px;
+    background-color: rgb(1, 116, 1);
+    color: white;
+  }
+
+  .no-pagado {
+    width: 93px;
+    background-color: rgb(187, 3, 3);
+    color: white;
+  }
+}

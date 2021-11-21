@@ -1,0 +1,39 @@
+.container-custom {
+  margin: 74px 10px 0px 10px;
+
+  .mat-card-header {
+    justify-content: space-between;
+
+    mat-card-title {
+      padding-top: 10px;
+    }
+
+    .button-add {
+      color: black;
+    }
+  }
+
+  mat-card-content {
+    table {
+      width: 100%;
+      .mat-icon-button {
+        color: var(--color-secondary);
+      }
+
+      .pagado {
+        background-color: rgb(1, 116, 1);
+        color: white;
+      }
+
+      .no-pagado {
+        background-color: rgb(187, 3, 3);
+        color: white;
+      }
+    }
+  }
+}
+
+.row-custom {
+  width: 100%;
+  padding-left: 1%;
+}

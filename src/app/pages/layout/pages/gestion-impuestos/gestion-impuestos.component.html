@@ -1,0 +1,121 @@
+<div class="container-custom">
+  <div class="wrapper_main">
+    <div class="wrapper_main_content">
+      <mat-card class="p-0">
+        <mat-card-header class="mat-card-header bg-primary p-2">
+          <mat-card-title> Gestión de impuestos</mat-card-title>
+          <button mat-raised-button class="button-add" (click)="accionRegistro()">
+            <mat-icon>add</mat-icon>
+            Agregar
+          </button>
+        </mat-card-header>
+        <br />
+        <mat-card-content class="pt-3 pb-3">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="Id">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.id }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="TipoBien">
+              <th mat-header-cell *matHeaderCellDef>Tipo Bien</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip>
+                    <mat-icon>{{ element.tipoBien.icono | lowercase }}</mat-icon>
+                    {{ element.tipoBien.nombre }}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="Estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip>
+                    <span *ngIf="element.estado === true"> Vigente </span>
+                    <span *ngIf="element.estado === false"> No Vigente </span>
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Obligatorio">
+              <th mat-header-cell *matHeaderCellDef>Obligatorio</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip>
+                    <span *ngIf="element.obligatorio === true">
+                      Obligatorio
+                    </span>
+                    <span *ngIf="element.obligatorio === false">
+                      Voluntario
+                    </span>
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="FechaLimitePagoOrdinario">
+              <th mat-header-cell *matHeaderCellDef>
+                Fecha Limite Pago Ordinario
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.fechaLimitePagoOrdinario | date: "dd/MM/yyyy" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="FechaLimitePagoExtraOrdinario">
+              <th mat-header-cell *matHeaderCellDef>
+                Fecha Limite Pago Extra Ordinario
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.fechaLimitePagoExtraOrdinario | date: "dd/MM/yyyy" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="VerMas">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button (click)="accionRegistro(element)" color="primary">
+                  Ver Detalle
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="AsignarImpuestoBienes">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="warn" (click)="asignarImpuestoBienes(element)"
+                  [disabled]="element.asignado">
+                  Asignar Impuesto a Bienes
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+          <br>
+          <br>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row row-custom">
+  <div class="col-md-4">
+    <app-resumen [data]="impuestosMora"></app-resumen>
+  </div>
+  <div class="col-md-4">
+    <app-resumen [data]="cantidadContribuyentes"></app-resumen>
+  </div>
+  <div class="col-md-4">
+    <app-resumen [data]="cantidadBienes"></app-resumen>
+  </div>
+</div>

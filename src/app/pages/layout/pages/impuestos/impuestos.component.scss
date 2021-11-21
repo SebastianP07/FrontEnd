@@ -1,0 +1,43 @@
+.container-custom {
+  margin: 74px 10px 0px 10px;
+
+  .mat-card-header {
+    justify-content: space-between;
+
+    mat-card-title {
+      padding-top: 10px;
+    }
+
+    .button-add {
+      color: black;
+    }
+  }
+
+  mat-card-content {
+    table {
+      width: 100%;
+      .mat-icon-button {
+        color: var(--color-secondary);
+      }
+
+      .btn-pagar {
+        background-color: #f2d625;
+        color: rgb(0, 0, 0);
+      }
+
+      .pagado {
+        background-color: rgb(1, 116, 1);
+        color: white;
+      }
+
+      .no-pagado {
+        background-color: rgb(187, 3, 3);
+        color: white;
+      }
+    }
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}

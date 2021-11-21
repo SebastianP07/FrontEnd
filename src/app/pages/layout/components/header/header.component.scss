@@ -1,0 +1,49 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  z-index: 11;
+  justify-content: center;
+  color: white;
+  font-weight: lighter;
+  border-bottom: solid 1px #e2e2e2;
+}
+
+.user-admin {
+  background-color: var(--background-menu-admin);
+}
+
+.user {
+  background-color: var(--background-menu-user);
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.dropdown {
+  margin-right: 1%;
+}
+
+.nameButton {
+  z-index: 11;
+  position: absolute;
+  right: 10px;
+
+  .name {
+    cursor: pointer;
+  }
+
+  button {
+    margin-left: 45px;
+  }
+}

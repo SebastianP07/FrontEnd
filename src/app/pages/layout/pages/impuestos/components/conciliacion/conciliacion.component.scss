@@ -1,0 +1,27 @@
+mat-card-header {
+    justify-content: space-between;
+
+    mat-card-title {
+        display: grid;
+        margin-bottom: 0px;
+    }
+}
+
+mat-card-content {
+    margin-bottom: 4px;
+    .center {
+        text-align: center;
+    }
+    mat-form-field {
+        width: 100%;
+        input {
+            width: 100%;
+        }
+    }
+}
+
+.mat-card-footer {
+    margin: 0px;
+    display: flex;
+    justify-content: flex-end;
+}

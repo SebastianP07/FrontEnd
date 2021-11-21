@@ -1,0 +1,150 @@
+<div class="container-custom">
+  <div class="wrapper_main">
+    <div class="wrapper_main_content">
+      <mat-card class="p-0">
+        <mat-card-header class="mat-card-header bg-primary p-2">
+          <mat-card-title> Impuestos </mat-card-title>
+        </mat-card-header>
+        <br />
+        <mat-card-content class="pt-3 pb-3">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="IdImpuesto">
+              <th mat-header-cell *matHeaderCellDef>ID Impuesto</th>
+              <td mat-cell *matCellDef="let element">
+                {{ obtenerIdImpuesto(element) }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="TipoBien">
+              <th mat-header-cell *matHeaderCellDef>Tipo Bien</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip class="cursor" (click)="verDetalleBien(element)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">{{ element.impuesto.tipoBien.icono |
+                      lowercase }}</mat-icon>
+                    {{ element.impuesto.tipoBien.nombre }}
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="Estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip>
+                    <span *ngIf="element.impuesto.estado === true">
+                      Vigente
+                    </span>
+                    <span *ngIf="element.impuesto.estado === false">
+                      No Vigente
+                    </span>
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Pagar">
+              <th mat-header-cell *matHeaderCellDef>Pagar</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip class="btn-pagar cursor" (click)="pagarImpuesto(element)" [disabled]="element.pagado">
+                    <span>
+                      Pagar
+                    </span>
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Pagado">
+              <th mat-header-cell *matHeaderCellDef>Pagado</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip [ngClass]="element.pagado ? 'pagado' : 'no-pagado'">
+                    <span *ngIf="element.pagado">
+                      Pagado
+                    </span>
+                    <span *ngIf="!element.pagado">
+                      No pagado
+                    </span>
+                  </mat-chip>
+                </mat-chip-list>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="FechaLimitePagoOrdinario">
+              <th mat-header-cell *matHeaderCellDef>
+                Fecha Limite Pago Ordinario
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{
+                element.impuesto.fechaLimitePagoOrdinario | date: "dd/MM/yyyy"
+                }}
+                <span *ngIf="validarFecha(element.impuesto.fechaLimitePagoOrdinario)">
+                  ⚠️
+                </span>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="FechaLimitePagoExtraOrdinario">
+              <th mat-header-cell *matHeaderCellDef>
+                Fecha Limite Pago Extra Ordinario
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{
+                element.impuesto.fechaLimitePagoExtraOrdinario
+                | date: "dd/MM/yyyy"
+                }}
+                <span *ngIf="validarFecha(element.impuesto.fechaLimitePagoExtraOrdinario)">
+                  ⚠️
+                </span>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="DiasMora">
+              <th mat-header-cell *matHeaderCellDef>
+                Dias mora
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{
+                validarDiasMora(element.impuesto.fechaLimitePagoOrdinario)
+                }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="VerMas">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button (click)="verDetalle(element)" color="primary">
+                  Ver Detalle
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Reclamo">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button (click)="realizarReclamo(element)" color="error">
+                  Reclamo
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Conciliacion">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button *ngIf="validarFecha(element.impuesto.fechaLimitePagoExtraOrdinario)"
+                  (click)="realizarConciliacion(element)" color="warn">
+                  Conciliación
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

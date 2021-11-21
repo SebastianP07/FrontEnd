@@ -1,0 +1,47 @@
+* {
+  padding: 10px;
+}
+
+p {
+  padding: 0 !important;
+}
+
+mat-card-header {
+  padding-bottom: 0px;
+}
+
+mat-card-content {
+  padding-top: 0px;
+}
+
+.row-custom {
+  height: 56px;
+
+  .col-text {
+    padding-top: 19px;
+    padding-bottom: 0px;
+  }
+
+  .col-icon {
+    display: flex;
+    align-items: center;
+    .icon-custom {
+      padding: 0px;
+    }
+  }
+}
+
+.container-components {
+  mat-panel-description {
+    mat-icon {
+      margin-left: 96%;
+    }
+  }
+  .chart-custom {
+    width: 100%;
+  }
+}
+
+.gris {
+  background: #fafafa !important;
+}

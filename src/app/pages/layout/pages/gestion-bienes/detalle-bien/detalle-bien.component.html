@@ -1,0 +1,51 @@
+<mat-card class="custom-card">
+    <mat-card-content class="pt-3">
+        <mat-card-header class="mat-card-header bg-primary p-2">
+            <mat-card-title> Detalle bien </mat-card-title>
+        </mat-card-header>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <b>Tipo de bien:</b><br>
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">
+                            {{ datosBien.icono| lowercase }}
+                        </mat-icon>
+                        {{ datosBien.nombreTipoBien }}
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="col-md-6">
+                <b>Avaluo:</b><br>{{datosBien.valorAvaluo | currency}}
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <b>Valor Total con Pago Voluntario:</b><br>{{datosBien.valorTotalConPagoVoluntario | currency}}
+            </div>
+            <div class="col-md-6">
+                <b>Valor Total Extra Ordinario:</b><br>{{datosBien.valorTotalExtraOrdinario | currency}}
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <b>Valor Total Extra Ordinario con Pago Voluntario:</b><br>
+                {{datosBien.valorTotalExtraOrdinarioConPagoVoluntario | currency}}
+            </div>
+            <div class="col-md-6">
+                <b>Valor Total Ordinario:</b><br>{{datosBien.valorTotalOrdinario | currency}}
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-footer class="footer-custom" fxLayoutAlign="end center">
+        <div mat-dialog-actions class="mat-dialog-actions">
+            <button class="button-aceptar" mat-raised-button color="warn" (click)="cerrarDialog()">
+                Cerrar
+            </button>
+        </div>
+    </mat-card-footer>
+</mat-card>
