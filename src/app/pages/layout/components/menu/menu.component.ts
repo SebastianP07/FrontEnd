@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   validacionDatosUsuario(): void {
     this.observableUser = this.userService.datosUsuario$.subscribe(response => {
       if (!response) {
-        this.router.navigate(['/auth/inicio-sesion']);
+        this.router.navigate(['/auth']);
       }
       const rolCustom = response?.responseDataUser?.roles.find((elem: { id: number; nombre: string }) => elem.id === 1)?.id;
       this.rol = rolCustom ? rolCustom : 2;

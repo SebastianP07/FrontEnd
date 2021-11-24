@@ -22,12 +22,19 @@ export class GestionImpuestosComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private gestionImpuestosService: GestionImpuestoService, private _snackBar: MatSnackBar,
     private gestionContribuyentesService: GestionContribuyentesService, private gestionBienesService: GestionBienesService,) {
+    this.buildVariables();
   }
 
   ngOnInit(): void {
     this.getAllImpuestos();
     this.calcularCantidadContribuyentes();
     this.calcularCantidadBienes();
+  }
+
+  buildVariables(): void {
+    this.impuestosMora = { cantidad: 0, descipcion: ''};
+    this.cantidadContribuyentes = { cantidad: 0, descipcion: ''};
+    this.cantidadBienes = { cantidad: 0, descipcion: ''};
   }
 
   getAllImpuestos(): void {

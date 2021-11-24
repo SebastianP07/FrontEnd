@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe(result => {
           if (result === 'cerrar sesion') {
-            this.router.navigate(['/auth/inicio-sesion']);
+            this.router.navigate(['/auth']);
           }
         });
       },

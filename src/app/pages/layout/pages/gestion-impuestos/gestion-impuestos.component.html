@@ -109,13 +109,13 @@
 </div>
 <br>
 <div class="row row-custom">
-  <div class="col-md-4">
+  <div *ngIf="impuestosMora.cantidad > 0" class="col-md-4">
     <app-resumen [data]="impuestosMora"></app-resumen>
   </div>
-  <div class="col-md-4">
+  <div *ngIf="cantidadContribuyentes.cantidad > 0" class="col-md-4">
     <app-resumen [data]="cantidadContribuyentes"></app-resumen>
   </div>
-  <div class="col-md-4">
+  <div *ngIf="cantidadBienes.cantidad > 0" class="col-md-4">
     <app-resumen [data]="cantidadBienes"></app-resumen>
   </div>
 </div>

@@ -26,7 +26,6 @@ export class UserService {
   }
 
   actualizarDataUsuario(detalleContribuyente: any): void {
-    debugger
     let storage = localStorage.getItem('datosUsuario');
     if (storage) {
       let storageDatosUsuario = JSON.parse(storage);

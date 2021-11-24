@@ -45,7 +45,9 @@ export class ListarVehiculosContribuyenteComponent implements OnInit {
       this.dataUser = response;
       const rolCustom = response?.responseDataUser?.roles.find((elem: { id: number; nombre: string }) => elem.id === 1)?.id;
       this.rol = rolCustom ? rolCustom : 2;
-      this.getAllVehiculos(response.numeroIdentificacion);
+      if (response.numeroIdentificacion) {
+        this.getAllVehiculos(response.numeroIdentificacion);
+      }
     });
   }
 

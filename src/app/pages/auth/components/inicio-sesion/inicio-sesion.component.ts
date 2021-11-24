@@ -44,34 +44,35 @@ export class InicioSesionComponent {
 
   submitFormUserLogin(dataUser: any): void {
     dataUser.grant_type = 'password';
-    this.userService.getTokenUser(dataUser).subscribe(
-      (responseTokenUser) => {
-        this.userService.getDataUser(dataUser.username).subscribe(responseDataUser => {
-          this.gestionContribuyentesService
-            .getContribuyentesDetalle(responseDataUser.numeroIdentificacion)
-            .subscribe((responseDetalleContribuyente) => {
-              const dataUserCustom = {
-                responseDataUser,
-                ...responseDetalleContribuyente,
-                responseTokenUser
-              };
-              this.userService.agregarDatosUsuario(dataUserCustom);
-              if (
-                dataUserCustom.responseDataUser.roles.find(
-                  (elem: { id: number; nombre: string }) => elem.id === 1
-                )
-              ) {
-                this.router.navigate(['/gestion-impuestos']);
-              } else {
-                this.router.navigate(['/impuestos']);
-              }
-            });
+    this.userService.getDataUser(dataUser.username).subscribe(responseDataUser => {
+      this.gestionContribuyentesService
+        .getContribuyentesDetalle(responseDataUser.numeroIdentificacion)
+        .subscribe((responseDetalleContribuyente) => {
+          const dataUserCustom = {
+            responseDataUser,
+            ...responseDetalleContribuyente,
+            // responseTokenUser
+          };
+          this.userService.agregarDatosUsuario(dataUserCustom);
+          if (
+            dataUserCustom.responseDataUser.roles.find(
+              (elem: { id: number; nombre: string }) => elem.id === 1
+            )
+          ) {
+            this.router.navigate(['/gestion-impuestos']);
+          } else {
+            this.router.navigate(['/impuestos']);
+          }
         });
-      },
-      (error) => {
-        console.error(error);
-        this.openSnackBar('Usuario y/o contraseña incorrectos', 'X');
-      }
-    );
+    });
+    // this.userService.getTokenUser(dataUser).subscribe(
+    //   (responseTokenUser) => {
+
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //     this.openSnackBar('Usuario y/o contraseña incorrectos', 'X');
+    //   }
+    // );
   }
 }

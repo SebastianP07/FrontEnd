@@ -46,7 +46,9 @@ export class ListarViviendasContribuyenteComponent implements OnInit {
       this.dataUser = response;
       const rolCustom = response?.responseDataUser?.roles.find((elem: { id: number; nombre: string }) => elem.id === 1)?.id;
       this.rol = rolCustom ? rolCustom : 2;
-      this.getAllViviendas(response.numeroIdentificacion);
+      if (response.numeroIdentificacion) {
+        this.getAllViviendas(response.numeroIdentificacion);
+      }
     });
   }
 

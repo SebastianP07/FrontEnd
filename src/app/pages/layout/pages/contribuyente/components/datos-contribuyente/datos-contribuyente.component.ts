@@ -44,7 +44,7 @@ export class DatosContribuyenteComponent implements OnInit {
         Validators.compose([Validators.required])
       ),
       numeroIdentificacion: new FormControl(
-        this.dataUser.numeroIdentificacion,
+        (this.dataUser?.numeroIdentificacion) ? this.dataUser.numeroIdentificacion : '',
         Validators.compose([Validators.required])
       ),
       primerApellido: new FormControl(
